@@ -1,6 +1,6 @@
 # react-study
 
-# 프로젝트 PR 방법
+## 프로젝트 PR 방법
 ### 💡 프로젝트 시작하기
 1. 터미널에서 자신의 로컬 폴더에 프로젝트 클론하기  
    ```$ git clone https://github.com/aeuna/react-study.git```
@@ -17,10 +17,26 @@
    $ git checkout 2-mihyun
    ```
 5. 작업시작!
+
+### 💡 프로젝트 PR 전, 충돌하지 않도록 저장소 동기화 하기
+1. 작업 커밋 후 main 브랜치로 옮기기
+   - 커밋메시지에 `#이슈번호` 붙이면 이슈에서 참조할 수 있어요!
+   ```
+   $ git commit -am "#2 1-21 커스텀 훅 예제"
+   $ git checkout main
+   ```
+2. main 브랜치에서 저장소의 최신 버전 땡겨오기
+   ```
+   $ git pull
+   ```
+4. 내 서브 브랜치로 옮긴 후 main 브랜치 병합하기
+   ```
+   $ git checkout 2-mihyun
+   $ git merge main
+   ```
  
 ### 💡 프로젝트 PR하기
 1. 작업 커밋 후 푸시하기  
-  - 커밋메시지에 `#이슈번호` 붙이면 이슈에서 참조할 수 있어요!
    ```
    $ git commit -am "#2 1-21 커스텀 훅 예제"
    $ git push
@@ -32,7 +48,6 @@
 
 ### 💡 PR하기 귀찮을 때, 직접 merge!
 1. 작업 커밋 후 main 브랜치로 체크아웃하기
-  - 커밋메시지에 `#이슈번호` 붙이면 이슈에서 참조할 수 있어요!
    ```
    $ git commit -am "#2 1-21 커스텀 훅 예제"
    $ git checkout main
