@@ -2,6 +2,8 @@ import React from 'react';
 import Hello from './Hello';
 import Wrapper from './Wrapper';
 import './App.css';
+import Counter from './Counter';
+import InputSample from './InputSample';
 
 function App() {
   const name = 'react';
@@ -18,8 +20,15 @@ function App() {
       />
       <div style={style}>{name}</div>
       <div className='gray-box'>{name}</div>
-      <Hello name='mihyun' color='blue' />
+      <Hello
+        name='mihyun'
+        color='blue'
+        isSpecial
+        // 프랍스만 쓰고 값 할당 안하면 기본값 true
+      />
       <Hello color='blue' />
+      <Counter />
+      <InputSample />
     </Wrapper>
   );
 }
