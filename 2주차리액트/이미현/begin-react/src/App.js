@@ -1,10 +1,15 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useMemo } from 'react';
 import Hello from './Hello';
 import Wrapper from './Wrapper';
 import Counter from './Counter';
 import InputSample from './InputSample';
 import UserList from './UserList';
 import CreateUser from './CreateUser';
+
+function countActiveUsers(users) {
+  console.log('active user 세는 중');
+  return users.filter((user) => user.active).length;
+}
 
 function App() {
   const [inputs, setInputs] = useState({
@@ -70,6 +75,12 @@ function App() {
     );
   };
 
+  /* 1-17. useMemo Hook */
+  const count = useMemo(() => countActiveUsers(users), [users]);
+  /* useMemo 파라미터 : (연산함수, deps 배열)
+     의존성 배열값이 바뀌면 연산 실행, 바뀐거 없으면 연산값 재사용
+  */
+
   return (
     <Wrapper>
       <Hello
@@ -88,6 +99,7 @@ function App() {
         onCreate={onCreate}
       />
       <UserList users={users} onRemove={onRemove} onToggle={onToggle} />
+      <div>active 사용자 수 : {count}</div>
     </Wrapper>
   );
 }
