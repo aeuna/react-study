@@ -1,4 +1,4 @@
-import React, { useRef, useState, useMemo } from 'react';
+import React, { useRef, useState, useMemo, useCallback } from 'react';
 import Hello from './Hello';
 import Wrapper from './Wrapper';
 import Counter from './Counter';
@@ -18,13 +18,14 @@ function App() {
   });
 
   const { username, email } = inputs;
-  const onChange = (e) => {
+  const onChange = useCallback((e) => {
     const { name, value } = e.target;
-    setInputs({
+    // 함수형 업데이트를 통한 컴포넌트 렌더링 최적화
+    setInputs((inputs) => ({
       ...inputs,
       [name]: value,
-    });
-  };
+    }));
+  }, []);
 
   const [users, setUsers] = useState([
     {
@@ -48,32 +49,36 @@ function App() {
   ]);
 
   const nextId = useRef(4);
-  const onCreate = () => {
+  const onCreate = useCallback(() => {
     const user = {
       id: nextId.current,
       username,
       email,
     };
-    setUsers(users.concat(user));
+    setUsers((users) => users.concat(user));
 
     setInputs({
       username: '',
       email: '',
     });
     nextId.current += 1;
-  };
+  }, [username, email]);
+  // create할때만 함수 만들어줘.
+  // 함수안에서 사용중인 상태들 다 의존성 값에 명시해줌.
 
-  const onRemove = (id) => {
-    setUsers(users.filter((user) => user.id !== id));
-  };
+  const onRemove = useCallback((id) => {
+    setUsers((users) => users.filter((user) => user.id !== id));
+  }, []);
+  // 삭제될때만 함수 만들어줘
 
-  const onToggle = (id) => {
-    setUsers(
+  const onToggle = useCallback((id) => {
+    setUsers((users) =>
       users.map((user) =>
         user.id === id ? { ...user, active: !user.active } : user
       )
     );
-  };
+  }, []);
+  // 토글할때만 함수 만들어줘
 
   /* 1-17. useMemo Hook */
   const count = useMemo(() => countActiveUsers(users), [users]);
@@ -81,9 +86,15 @@ function App() {
      의존성 배열값이 바뀌면 연산 실행, 바뀐거 없으면 연산값 재사용
   */
 
+  /* 1-18. useCallback Hook */
+  /*
+    함수는 컴포넌트가 리렌더링 될 때마다 새로 만들어진다. 
+    -> 매번 새로 만들어질 필요가 있을까? 함수를 재사용하자.
+  */
+
   return (
     <Wrapper>
-      <Hello
+      {/* <Hello
         name='mihyun'
         color='blue'
         isSpecial
@@ -91,7 +102,7 @@ function App() {
       />
       <Hello color='blue' />
       <Counter />
-      <InputSample />
+      <InputSample /> */}
       <CreateUser
         username={username}
         email={email}

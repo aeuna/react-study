@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 /* 한 파일에 여러개의 컴포넌트 선언 가능 */
-const User = ({ user, onRemove, onToggle }) => {
+const User = React.memo(({ user, onRemove, onToggle }) => {
   useEffect(() => {
     console.log('user 컴포 나타남. 마운트!');
     /* 컴포넌트가 만들어진 다음에, 
@@ -46,7 +46,7 @@ const User = ({ user, onRemove, onToggle }) => {
       <button onClick={() => onRemove(user.id)}>삭제</button>
     </div>
   );
-};
+});
 
 const UserList = ({ users, onRemove, onToggle }) => {
   return (
@@ -63,4 +63,4 @@ const UserList = ({ users, onRemove, onToggle }) => {
   );
 };
 
-export default UserList;
+export default React.memo(UserList);
