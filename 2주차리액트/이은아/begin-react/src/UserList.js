@@ -8,7 +8,7 @@ const User = ({ user }) => {
   );
 };
 
-const UserList = (users) => {
+const UserList = ({ users }) => {
   return (
     <div>
       <div>
