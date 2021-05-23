@@ -1,7 +1,6 @@
 import React, { useRef, useCallback, useReducer, useMemo } from 'react';
 import UserList from './UserList';
 import CreateUser from './CreateUser';
-import useInputs from './hooks/useInputs';
 
 function countActiveUsers(users) {
   console.log('active user 세는 중');
@@ -9,6 +8,10 @@ function countActiveUsers(users) {
 }
 
 const initialState = {
+  inputs: {
+    username: '',
+    email: '',
+  },
   users: [
     {
       id: 1,
@@ -54,19 +57,36 @@ const initialState = {
 
 function reducer(state, action) {
   switch (action.type) {
+    /* 
+      onChange 함수의 dispatch 함수가 얘를 불러줌 
+      리듀서는 업데이트 후의 새로운 상태를 리턴한다. state 새로 장착
+    */
+    case 'CHANGE_INPUT':
+      return {
+        ...state, // 기존 state 객체 몽땅 펼쳐 넣기. 스테이트 업데이트는 한꺼번에
+        inputs: {
+          // 그중에서 inputs 객체 내용을 새로 업데이트해줄거다.
+          ...state.inputs, // inputs 객체도 기존꺼 그대로 펼쳐서 갖고옴
+          [action.name]: action.value, //  받아온 액션객체에서 name, value 꺼내서 추가
+        },
+      };
     case 'CREATE_USER':
       return {
+        // TODO: 얘는 왜 state를 몽땅 안펼쳐넣지?
+        inputs: initialState.inputs, // 사용자 생성 후 input 값 초기화
         users: state.users.concat(action.user), // 원래 있던 users 상태 복사해서 그대로 새로운 사용자 이어붙여줌
       };
     case 'TOGGLE_USER':
       return {
+        ...state,
         users: state.users.map((user) =>
           user.id === action.id ? { ...user, active: !user.active } : user
         ),
       };
     case 'REMOVE_USER':
       return {
-        users: state.users.filter((user) => user.id !== action.id),
+        ...state,
+        users: state.users.filter((user) => user.id === action.id),
       };
     default:
       return state;
@@ -74,11 +94,6 @@ function reducer(state, action) {
 }
 
 function App() {
-  const [{ username, email }, onChange, reset] = useInputs({
-    username: '',
-    email: '',
-  });
-
   /* 
   useReducer에 내가 업데이트 로직을 모아둔 리듀서 함수와 초기 상태값을 전달하고,
   사용하고자 하는 상태랑 특정 액션 호출할 dispatch 함수를 만든다.
@@ -95,10 +110,29 @@ function App() {
 
   // state 객체에서 사용할 애들 빼줌.
   const { users } = state;
+  const { username, email } = state.inputs;
 
   /* useCallback Hook: change 이벤트가 발생했을 때만 이 함수를 만들어줘.
     => 쓸데없이 컴포넌트 리렌더링 될 때마다 함수를 다시 생성하지 않는다.
   */
+  const onChange = useCallback((e) => {
+    /*
+     한 번에 하나의 input만 입력가능하니까 e.target에는 하나의 인풋에서 입력한 정보만들어있다.
+     name은 하나의 인풋박스 이름을 가리킨다.
+     사용자이름 input 입력 시 {name: 'username', value: '이름입니다'} 이런식으로 이벤트 타겟 정보를 받아옴
+    */
+    const { name, value } = e.target;
+    /* 
+      dispatch를 통해서 수행할 액션정보가 담긴 객체를 넘겨주고 리듀서를 부른다.
+      얘는 지금 change 이벤트가 발생할 때마다 입력된 정보들을 리듀서에 넘겨서 상태를 최신으로 세팅하고 있다.
+    */
+    dispatch({
+      type: 'CHANGE_INPUT',
+      name,
+      value,
+    });
+  }, []);
+
   const onCreate = useCallback(() => {
     dispatch({
       type: 'CREATE_USER',
@@ -108,11 +142,10 @@ function App() {
         email,
       },
     });
-    reset();
     nextId.current += 1;
     // 업데이트 끝나면 바로 id 기본값에 +1해서 올려줌.
     // 그러면 다음엔 5부터 시작
-  }, [username, email, reset]); // 사용중인 상태 의존성 값 명시
+  }, [username, email]); // 사용중인 상태 의존성 값 명시
 
   const onToggle = useCallback((id) => {
     dispatch({
