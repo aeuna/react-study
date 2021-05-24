@@ -1,14 +1,6 @@
-<<<<<<< HEAD
-import React from 'react';
-import UserList from './UserList';
-
-function App() {
-  return (
-    <UserList />
-  );
-=======
 import React, { useRef } from 'react';
 import UserList from './UserList';
+import CreateUser from './CreateUser';
 
 function App() {
   const users = [
@@ -36,8 +28,12 @@ function App() {
 
     nextId.current += 1;
   };
-  return <UserList users={users} />;
->>>>>>> main
+  return (
+    <>
+      <CreateUser />
+      <UserList users={users} />
+    </>
+  );
 }
 
 export default App;
