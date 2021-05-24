@@ -1,6 +1,7 @@
 import React from 'react';
 
 function User({ user }) {
+<<<<<<< HEAD
   return (
     <div>
       <b>{user.username}</b> <span>({user.email})</span>
@@ -29,6 +30,18 @@ function UserList() {
 
   return (
     <div>
+=======
+  return (
+    <div>
+      <b>{user.username}</b> <span>({user.email})</span>
+    </div>
+  );
+}
+
+function UserList({ users }) {
+  return (
+    <div>
+>>>>>>> main
       {users.map(user => (
         <User user={user} key={user.id} />
       ))}
