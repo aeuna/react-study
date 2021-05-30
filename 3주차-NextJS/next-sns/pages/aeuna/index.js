@@ -1,7 +1,39 @@
-import React from 'react';
+import React from "react";
+import Feed from "../../components/Feed";
+import Header from "../../components/Header";
 
 const index = () => {
-  return <div>sample</div>;
+  const [comments, setComments] = React.useState([
+    {
+      id: 1,
+      username: "aeuna",
+      comment: "정말 맛있겠다!",
+    },
+    {
+      id: 2,
+      username: "kelee98",
+      comment: "장소가 어디인가용?",
+    },
+    {
+      id: 3,
+      username: "xianeml",
+      comment: "가고 싶어요!",
+    },
+    {
+      id: 4,
+      username: "huiji0315",
+      comment: "나도 가고 싶어요!",
+    },
+  ]);
+
+  return (
+    <div>
+      <Header />
+      <Feed comments={comments} setComments={setComments} />
+      <Feed comments={comments} setComments={setComments} />
+      <Feed comments={comments} setComments={setComments} />
+    </div>
+  );
 };
 
 export default index;
