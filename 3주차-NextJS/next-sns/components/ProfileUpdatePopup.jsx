@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
     padding: '2rem',
   },
   label: {
-    width: '125px',
     fontWeight: 'bold',
   },
 }));
@@ -74,12 +73,12 @@ export default function ProfileUpdatePopup() {
             <Divider variant='middle' light />
             <div className={classes.formGroup}>
               <Grid container direction='row' alignItems='center'>
-                <Grid item md={2} sm={12}>
+                <Grid item md={2} xs={12}>
                   <label htmlFor='userName' className={classes.label}>
                     사용자 이름
                   </label>
                 </Grid>
-                <Grid item md={10} sm={12}>
+                <Grid item md={10} xs={12}>
                   <TextField
                     margin='dense'
                     id='userName'
@@ -92,12 +91,12 @@ export default function ProfileUpdatePopup() {
                 </Grid>
               </Grid>
               <Grid container direction='row' alignItems='center'>
-                <Grid item md={2} sm={12}>
+                <Grid item md={2} xs={12}>
                   <label htmlFor='webPage' className={classes.label}>
                     웹사이트
                   </label>
                 </Grid>
-                <Grid item md={10} sm={12}>
+                <Grid item md={10} xs={12}>
                   <TextField
                     autoFocus
                     margin='dense'
@@ -110,12 +109,12 @@ export default function ProfileUpdatePopup() {
                 </Grid>
               </Grid>
               <Grid container direction='row' alignItems='center'>
-                <Grid item md={2} sm={12}>
+                <Grid item md={2} xs={12}>
                   <label htmlFor='caption' className={classes.label}>
                     소개
                   </label>
                 </Grid>
-                <Grid item md={10} sm={12}>
+                <Grid item md={10} xs={12}>
                   <TextField
                     autoFocus
                     margin='dense'
