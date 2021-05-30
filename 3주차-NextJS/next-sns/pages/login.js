@@ -1,8 +1,42 @@
 import React from 'react';
 import firebase from '../firestores/firebase';
-import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+import { Avatar } from '@material-ui/core';
+import { palette } from '@material-ui/system';
+import { CssBaseline, Box, Container } from "@material-ui/core";
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  Typography
+} from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+    center: {
+        marginTop: theme.spacing(3),
+        display: 'flex',
+        justifyContent: 'center'
+    },
+    headers: {
+      background: "#FF0000"
+    },
+    pricing: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "baseline",
+      marginBottom: "16px"
+    },
+    descriptions: {
+      margin: 0,
+      padding: 0,
+    
+    }
+}));
+
+
 const login = () => {
   const loginfuntion=() => {
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -23,16 +57,41 @@ const login = () => {
     });
   
   };
-
-  return (
-  <div>
-   
-        <Button variant="contained" color="primary" onClick={loginfuntion} justify="center">
-        구글 로그인
-    </Button>
   
+  const classes = useStyles();
+  return (
     
-
+  <div >
+   
+      <Box clone p={10}>
+        <Container maxWidth="sm" className ={classes.center}>
+    <Card>
+      <CardHeader
+        title="MySns"
+        titleTypographyProps={{ align: "center" }}
+        className={classes.headers}
+      />
+      <CardContent>
+        <div className={classes.pricing}>
+          <Typography variant="h6" color="textPrimary" align="center">
+           환영 합니다! 로그인을 해주세요
+          </Typography>
+        </div>
+        <ul className={classes.descriptions}>
+          {<Container maxWidth="sm"  className={classes.center}>
+        <Button variant="contained"  size="small" color="primary" onClick={loginfuntion} >
+        <Avatar src="images/google.png" className={classes.avatar} />
+         <Typography component='p' variant='h6' >
+          Sign in with Google
+        </Typography>
+        </Button>
+        </Container>}
+        </ul>
+      </CardContent>
+      </Card>
+      </Container>
+      </Box>
+     
     
   </div>
   );
