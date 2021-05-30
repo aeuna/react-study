@@ -1,9 +1,12 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
 
 const myFeed = () => {
   return (
     <div>
-      <div>마이프로필 페이지</div>
+      <Button variant="contained" color="primary">
+      Hello World
+      </Button>
     </div>
   );
 };

@@ -1,11 +1,10 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import Avatar from '../../components/Avatar';
+import ProfileUpdatePopup from '../../components/ProfileUpdatePopup';
 import { Divider, Grid, Link } from '@material-ui/core';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-//import tileData from './tileData';
 import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles((theme) => ({
   primary: {
@@ -15,11 +14,35 @@ const useStyles = makeStyles((theme) => ({
   divider: {
     margin: theme.spacing(10, 0),
   },
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(1), //grid padding
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
 }));
+
+
 
 const myFeed = () => {
   const classes = useStyles();
-
+  function FormRow() {
+    return ( //return renders the grid
+      <React.Fragment>
+        <Grid item xs={4}>
+          <Paper className={classes.paper}>item</Paper>
+        </Grid>
+        <Grid item xs={4}>
+          <Paper className={classes.paper}>item</Paper>
+        </Grid>
+        <Grid item xs={4}>
+          <Paper className={classes.paper}>item</Paper>
+        </Grid>
+      </React.Fragment>
+    );
+  }
   return (
     <div style={{ padding: 20 }}>
       <Grid
@@ -48,13 +71,17 @@ const myFeed = () => {
       {/*</Grid>*/}
       </Grid>
       <Divider variant='middle' light className={classes.divider}/>
-      <GridList cellHeight={160} className={classes.gridList} cols={3}>
-  {/*{tileData.map((tile) => (
-    <GridListTile key={tile.img} cols={tile.cols || 1}>
-      <img src={tile.img} alt={tile.title} />
-    </GridListTile>
-  ))}*/}
-      </GridList>
+      <Grid container spacing={1}>
+        <Grid container item xs={12} spacing={3}>
+          <FormRow />
+        </Grid>
+        <Grid container item xs={12} spacing={3}>
+          <FormRow />
+        </Grid>
+        <Grid container item xs={12} spacing={3}>
+          <FormRow />
+        </Grid>
+      </Grid>
     </div>
   );
 };
