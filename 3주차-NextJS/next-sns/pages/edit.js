@@ -1,9 +1,10 @@
 import React from 'react';
+import EditForm from '../components/EditForm';
 
 const edit = () => {
   return (
     <div>
-      <div>게시글 생성/수정 페이지</div>
+      <EditForm />
     </div>
   );
 };
