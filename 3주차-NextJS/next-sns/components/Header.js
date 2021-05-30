@@ -1,25 +1,26 @@
 import React from "react";
 import Link from "next/link";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import Badge from "@material-ui/core/Badge";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
+import {
+  makeStyles,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  Badge,
+  MenuItem,
+  Menu,
+} from "@material-ui/core";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 
 const useStyles = makeStyles((theme) => ({
+  fix: {
+    position: "fixed",
+    top: 0,
+  },
   grow: {
     flexGrow: 1,
-    // position: "fixed",
-    // top: 0,
-    /* width: 100% */
-    // left: 0,
-    // right: 0,
   },
   title: {
     display: "none",
@@ -65,10 +66,9 @@ export default function Header() {
       <MenuItem onClick={handleMenuClose}>알림 3</MenuItem>
     </Menu>
   );
-
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar className={classes.fix}>
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
             Sullivan-SNS
@@ -83,7 +83,7 @@ export default function Header() {
             <Link href="/">
               <IconButton
                 edge="end"
-                aria-label="account of current user"
+                aria-label="account of user"
                 color="inherit"
               >
                 <AccountCircle />
