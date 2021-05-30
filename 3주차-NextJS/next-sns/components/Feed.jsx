@@ -1,20 +1,24 @@
 import React from "react";
 import Link from "next/link";
-import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import Collapse from "@material-ui/core/Collapse";
 import Avatar from "./Avatar";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
+import Comment from "./Comment";
+import {
+  Paper,
+  TextField,
+  Grid,
+  CardHeader,
+  CardMedia,
+  CardContent,
+  Card,
+  CardActions,
+  Collapse,
+  IconButton,
+  Typography,
+  makeStyles,
+} from "@material-ui/core";
+import SendIcon from "@material-ui/icons/Send";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ChatIcon from "@material-ui/icons/Chat";
-import Comment from "./Comment";
-import { Paper, TextField, Grid } from "@material-ui/core";
-import SendIcon from "@material-ui/icons/Send";
 
 const useStyles = makeStyles(() => ({
   feed: {
@@ -24,7 +28,7 @@ const useStyles = makeStyles(() => ({
     alignItems: "center",
   },
   root: {
-    marginTop: "20px",
+    marginTop: "55px",
     maxWidth: "800px",
   },
   media: {
@@ -47,7 +51,7 @@ const useStyles = makeStyles(() => ({
 export default function Feed({ comments, setComments }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-  const [hearted, setHearted] = React.useState(false);
+  const [liked, setLiked] = React.useState(false);
   const [inputs, setInputs] = React.useState({
     comment: "",
   });
@@ -57,7 +61,7 @@ export default function Feed({ comments, setComments }) {
   };
 
   const handleHeartClick = () => {
-    setHearted(!hearted);
+    setLiked(!liked);
   };
 
   const handleTextChange = (e) => {
@@ -105,7 +109,7 @@ export default function Feed({ comments, setComments }) {
         </CardContent>
         <CardActions disableSpacing>
           <IconButton aria-label="add to favorites" onClick={handleHeartClick}>
-            {hearted ? <FavoriteIcon color="secondary" /> : <FavoriteIcon />}
+            {liked ? <FavoriteIcon color="secondary" /> : <FavoriteIcon />}
           </IconButton>
           <IconButton
             aria-label="comment"
