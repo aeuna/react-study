@@ -1,10 +1,9 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
-import { Grid, OutlinedInput } from '@material-ui/core';
+import { Grid, OutlinedInput, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -48,7 +47,7 @@ const editForm = () => {
               </label>
             </Grid>
             <Grid item md={10} xs={12}>
-              <OutlinedInput
+              <TextField
                 autoFocus
                 margin='dense'
                 id='caption'
@@ -67,12 +66,12 @@ const editForm = () => {
               </label>
             </Grid>
             <Grid item md={10} xs={12}>
-              <OutlinedInput
+              <TextField
                 autoFocus
                 margin='dense'
-                id='webPage'
+                id='place'
                 type='text'
-                variant='place'
+                variant='outlined'
                 placeholder='위치 추가'
                 fullWidth
               />
@@ -86,12 +85,12 @@ const editForm = () => {
               </label>
             </Grid>
             <Grid item md={10} xs={12}>
-              <OutlinedInput
+              <TextField
                 autoFocus
                 margin='dense'
                 id='tagging'
                 type='text'
-                variant='place'
+                variant='outlined'
                 placeholder='태그하기'
                 fullWidth
               />
