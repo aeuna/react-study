@@ -1,6 +1,5 @@
 import React from "react";
 import Avatar from "../components/Avatar";
-import { makeStyles } from "@material-ui/core/styles";
 import { Divider, Grid } from "@material-ui/core";
 
 export default function Comment({ data }) {
