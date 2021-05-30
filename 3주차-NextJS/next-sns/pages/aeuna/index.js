@@ -1,6 +1,5 @@
 import React from "react";
 import Feed from "../../components/Feed";
-import Header from "../../components/Header";
 
 const index = () => {
   const [comments, setComments] = React.useState([
@@ -27,12 +26,11 @@ const index = () => {
   ]);
 
   return (
-    <div>
-      <Header />
+    <>
       <Feed comments={comments} setComments={setComments} />
       <Feed comments={comments} setComments={setComments} />
       <Feed comments={comments} setComments={setComments} />
-    </div>
+    </>
   );
 };
 
